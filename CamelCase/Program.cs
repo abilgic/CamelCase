@@ -11,7 +11,29 @@
 //var cline = Console.ReadLine();
 //var cline = "S;M;plasticCup()";
 //var cline = "S;C;LargeSoftwareBook";
-var cline = "S;V;pictureFrame";
+//var cline = "S;V;pictureFrame";
+//var cline = "C;V;mobile phone";
+//var cline = "C;C;coffee machine";
+//var cline = "C;M;white sheet of paper";
+//var cline = "C;M;mouse pad";
+//var cline = "C;C;code swarm";
+//var cline = "S;C;OrangeHighlighter";
+///*************************************
+//var cline = "C;V;can of coke";
+//var cline = "S;M;sweatTea()";
+//var cline = "S;V;epsonPrinter";
+//var cline = "C;M;santa claus";
+//var cline = "C;C;mirror";
+///Outputs
+/// canOfCoke
+///sweat tea
+///epson printer
+///santaClaus()
+///Mirror
+
+var cline = "";
+//while((cline = Console.ReadLine())!=null && cline != null) {
+
 var splitted = cline.Split(';');
 
 if (splitted[0] == "S")
@@ -55,6 +77,15 @@ if (splitted[0] == "S")
                 resultstrc = string.Concat(substr1[i], " ", substr1[i + 1], " ", substr1[i + 2]);
 
             }
+            else if (i + 1 < uIndexList.Count)
+            {
+                lower[i] = char.ToLower(splitted[2][uIndexList[i]]);
+                lower[i + 1] = char.ToLower(splitted[2][uIndexList[i + 1]]);
+                splitted[2] = splitted[2].Replace(splitted[2][uIndexList[i]], lower[i]).Replace(splitted[2][uIndexList[i + 1]], lower[i + 1]);
+                substr1[i] = splitted[2].Substring(uIndexList[i], uIndexList[i + 1] - uIndexList[i]);
+                substr1[i + 1] = splitted[2].Substring(uIndexList[i + 1], splitted[2].Length - uIndexList[i + 1]);
+                resultstrc = string.Concat(substr1[i], " ", substr1[i + 1]);
+            }
         }
         Console.WriteLine(resultstrc);
     }
@@ -62,7 +93,6 @@ if (splitted[0] == "S")
     {
         var uIndexList = UpperIndexes(splitted[2]);
         char[] lower = new char[uIndexList.Count];
-        //string[] substrv1 = new string[uIndexList.Count];
         var resultstrv = "";
 
         for (int i = 0; i < uIndexList.Count; i++)
@@ -79,6 +109,69 @@ if (splitted[0] == "S")
         Console.WriteLine(resultstrv);
     }
 }
+else if (splitted[0] == "C")
+{
+    if (splitted[1] == "V")
+    {
+        var splitted2 = splitted[2].Split(' ');
+        char[] c = new char[splitted2.Length];
+        char[] upper = new char[splitted2.Length];
+        var restrcv = "";
+        var restrcvlast = "";
+        for (int i = 1; i < splitted2.Length; i++)
+        {
+            c[i] = splitted2[i][0];
+            upper[i] = char.ToUpper(c[i]);
+            splitted2[i] = upper[i] + splitted2[i].Substring(1);
+            restrcvlast += splitted2[i];
+
+        }
+        restrcv = String.Concat(splitted2[0], restrcvlast);
+        Console.WriteLine(restrcv);
+    }
+    else if (splitted[1] == "C")
+    {
+        var splittedcc2 = splitted[2].Split(' ');
+        char[] c = new char[splittedcc2.Length];
+        char[] upper = new char[splittedcc2.Length];
+        var restrcc = "";
+        for (int i = 0; i < splittedcc2.Length; i++)
+        {
+            c[i] = splittedcc2[i][0];
+            upper[i] = char.ToUpper(c[i]);
+            splittedcc2[i] = upper[i] + splittedcc2[i].Substring(1);
+            restrcc += splittedcc2[i];
+        }
+
+        Console.WriteLine(restrcc);
+
+    }
+    else if (splitted[1] == "M")
+    {
+        var splittedcm2 = splitted[2].Split(' ');
+        char[] c = new char[splittedcm2.Length];
+        char[] upper = new char[splittedcm2.Length];
+        var restrcm = "";
+        var lastrestrcm = "";
+        for (int i = 1; i < splittedcm2.Length; i++)
+        {
+            c[i] = splittedcm2[i][0];
+            upper[i] = char.ToUpper(c[i]);
+
+            splittedcm2[i] = upper[i] + splittedcm2[i].Substring(1);
+
+            lastrestrcm += splittedcm2[i];
+        }
+        restrcm = string.Concat(splittedcm2[0], lastrestrcm, "()");
+
+        Console.WriteLine(restrcm);
+    }
+
+}
+//}
+
+
+
 
 List<int> UpperIndexes(string str)
 {
